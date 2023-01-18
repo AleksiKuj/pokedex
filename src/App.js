@@ -39,8 +39,11 @@ function App() {
   }
   return (
     <div>
-      <button onClick={previousPage}>PREVIOUS PAGE</button>
+      <button onClick={previousPage} className="p-2">
+        PREVIOUS PAGE
+      </button>
       <button onClick={nextPage}>NEXT PAGE</button>
+      <p>Page {currentPage}</p>
       <PokemonList pokemons={pokemons} />
     </div>
   )

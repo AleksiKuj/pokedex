@@ -1,9 +1,10 @@
+import Pokemon from "./Pokemon"
+
 const PokemonList = ({ pokemons }) => {
-  const style = { color: "red" }
   return (
-    <div style={style}>
+    <div className="flex flex-wrap justify-center">
       {pokemons.map((pokemon) => (
-        <p key={pokemon.name}>{pokemon.name}</p>
+        <Pokemon pokemon={pokemon} key={pokemon.name} />
       ))}
     </div>
   )
