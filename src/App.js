@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import PokemonList from "./components/PokemonList"
 
 function App() {
+  const [pokemons, setPokemons] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
+  const perPage = 50
+  const baseUrl = "https://pokeapi.co/api/v2"
+
+  useEffect(() => {
+    const getPokemon = async () => {
+      const offset = (currentPage - 1) * perPage
+      const response = await axios.get(
+        `${baseUrl}/pokemon?limit=${perPage}&offset=${offset}`
+      )
+      setPokemons(response.data.results)
+      console.log(response.data)
+      console.log(response.data.count)
+      setTotalPages(Math.ceil(response.data.count / perPage))
+    }
+
+    getPokemon()
+  }, [currentPage])
+
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1)
+      console.log(currentPage)
+    }
+  }
+  const previousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1)
+      console.log(currentPage)
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={previousPage}>PREVIOUS PAGE</button>
+      <button onClick={nextPage}>NEXT PAGE</button>
+      <PokemonList pokemons={pokemons} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
