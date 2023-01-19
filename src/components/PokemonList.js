@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
 import Menu from "./Menu"
 import Pokemon from "./Pokemon"
 

@@ -2,7 +2,6 @@ import "./App.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import PokemonList from "./components/PokemonList"
-import Menu from "./components/Menu"
 import PokemonView from "./components/PokemonView"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
@@ -20,8 +19,8 @@ function App() {
         `${baseUrl}/pokemon?limit=${perPage}&offset=${offset}`
       )
       setPokemons(response.data.results)
-      console.log(response.data)
-      console.log(response.data.count)
+      // console.log(response.data)
+      // console.log(response.data.count)
       setTotalPages(Math.ceil(response.data.count / perPage))
     }
 
