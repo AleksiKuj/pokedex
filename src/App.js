@@ -3,6 +3,8 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PokemonList from "./components/PokemonList"
 import Menu from "./components/Menu"
+import PokemonView from "./components/PokemonView"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
   const [pokemons, setPokemons] = useState([])
@@ -40,12 +42,25 @@ function App() {
   }
   return (
     <div>
-      <Menu
-        previousPage={previousPage}
-        currentPage={currentPage}
-        nextPage={nextPage}
-      />
-      <PokemonList pokemons={pokemons} />
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <PokemonList
+                pokemons={pokemons}
+                currentPage={currentPage}
+                previousPage={previousPage}
+                nextPage={nextPage}
+              />
+            }
+          />
+          <Route
+            path="/pokemons/:name"
+            element={<PokemonView pokemons={pokemons} />}
+          />
+        </Routes>
+      </Router>
     </div>
   )
 }

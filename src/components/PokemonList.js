@@ -1,11 +1,21 @@
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
+import Menu from "./Menu"
 import Pokemon from "./Pokemon"
 
-const PokemonList = ({ pokemons }) => {
+const PokemonList = ({ pokemons, previousPage, currentPage, nextPage }) => {
   return (
-    <div className="flex flex-wrap justify-center">
-      {pokemons.map((pokemon) => (
-        <Pokemon pokemon={pokemon} key={pokemon.name} />
-      ))}
+    <div>
+      <Menu
+        previousPage={previousPage}
+        currentPage={currentPage}
+        nextPage={nextPage}
+      />
+
+      <div className="flex flex-wrap justify-center">
+        {pokemons.map((pokemon) => (
+          <Pokemon pokemon={pokemon} key={pokemon.name} />
+        ))}
+      </div>
     </div>
   )
 }
