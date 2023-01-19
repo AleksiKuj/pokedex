@@ -2,12 +2,13 @@ import "./App.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import PokemonList from "./components/PokemonList"
+import Menu from "./components/Menu"
 
 function App() {
   const [pokemons, setPokemons] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
-  const perPage = 50
+  const perPage = 20
   const baseUrl = "https://pokeapi.co/api/v2"
 
   useEffect(() => {
@@ -39,11 +40,11 @@ function App() {
   }
   return (
     <div>
-      <button onClick={previousPage} className="p-2">
-        PREVIOUS PAGE
-      </button>
-      <button onClick={nextPage}>NEXT PAGE</button>
-      <p>Page {currentPage}</p>
+      <Menu
+        previousPage={previousPage}
+        currentPage={currentPage}
+        nextPage={nextPage}
+      />
       <PokemonList pokemons={pokemons} />
     </div>
   )
