@@ -15,6 +15,11 @@ const PokemonList = ({ pokemons, previousPage, currentPage, nextPage }) => {
           <Pokemon pokemon={pokemon} key={pokemon.name} />
         ))}
       </div>
+      <Menu
+        previousPage={previousPage}
+        currentPage={currentPage}
+        nextPage={nextPage}
+      />
     </div>
   )
 }

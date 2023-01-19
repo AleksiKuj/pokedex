@@ -27,7 +27,7 @@ const Pokemon = ({ pokemon }) => {
         {loading ? (
           <ClipLoader color="#D70040" />
         ) : (
-          <img src={imageUrl} alt={pokemon.name}></img>
+          <img src={imageUrl} alt={pokemon.name} width={110}></img>
         )}
       </Link>
     </div>

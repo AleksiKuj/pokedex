@@ -2,7 +2,7 @@ import Button from "./Button"
 
 const Menu = ({ previousPage, nextPage, currentPage }) => {
   return (
-    <div className="flex flex-col items-center pt-3 ">
+    <div className="flex flex-col items-center py-3 ">
       <div>
         <Button onClick={previousPage} buttonText={"Previous page"}></Button>
         <Button onClick={nextPage} buttonText={"Next page"}></Button>

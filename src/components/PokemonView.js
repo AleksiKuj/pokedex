@@ -13,6 +13,7 @@ const PokemonView = ({ pokemons }) => {
   const pokemon = match
     ? pokemons.find((pokemon) => pokemon.name === match.params.name)
     : null
+
   useEffect(() => {
     const fetchPokemonImage = async (pokemon) => {
       const response = await axios.get(pokemon.url)
@@ -22,6 +23,73 @@ const PokemonView = ({ pokemons }) => {
       // console.log(pokemonUrl.abilities.map((ability) => ability.ability.name))
     }
     fetchPokemonImage(pokemon)
+
+    const x = () => {
+      setTimeout(() => {
+        const elements = document.getElementsByClassName("pokemon-type")
+        for (var i = 0; i < elements.length; i++) {
+          switch (elements[i].innerHTML) {
+            case "grass":
+              elements[i].style.backgroundColor = "#9BCC50"
+              break
+            case "poison":
+              elements[i].style.backgroundColor = "#B97FC9"
+              break
+            case "fire":
+              elements[i].style.backgroundColor = "#F08030"
+              break
+            case "flying":
+              elements[i].style.backgroundColor = "#8FAEC3"
+              break
+            case "water":
+              elements[i].style.backgroundColor = "#6890F0"
+              break
+            case "normal":
+              elements[i].style.backgroundColor = "#A8A878"
+              break
+            case "electric":
+              elements[i].style.backgroundColor = "#F8D030"
+              break
+            case "ice":
+              elements[i].style.backgroundColor = "#92C0BE"
+              break
+            case "fighting":
+              elements[i].style.backgroundColor = "#C03028"
+              break
+            case "ground":
+              elements[i].style.backgroundColor = "#E0C068"
+              break
+            case "bug":
+              elements[i].style.backgroundColor = "#A8B820"
+              break
+            case "psychic":
+              elements[i].style.backgroundColor = "#F85888"
+              break
+            case "rock":
+              elements[i].style.backgroundColor = "#B8A038"
+              break
+            case "ghost":
+              elements[i].style.backgroundColor = "#705898"
+              break
+            case "dark":
+              elements[i].style.backgroundColor = "#705848"
+              break
+            case "dragon":
+              elements[i].style.backgroundColor = "#7038F8"
+              break
+            case "steel":
+              elements[i].style.backgroundColor = "#B8B8D0"
+              break
+            case "fairy":
+              elements[i].style.backgroundColor = "#F0B6BC"
+              break
+            default:
+              elements[i].style.backgroundColor = "black"
+          }
+        }
+      }, 75)
+    }
+    x()
   }, [])
 
   if (!pokemon) {
@@ -41,20 +109,33 @@ const PokemonView = ({ pokemons }) => {
         {loading ? (
           <ClipLoader color="#D70040" />
         ) : (
-          <img src={pokemonUrl.sprites.front_default} alt={pokemon.name}></img>
+          <img
+            src={pokemonUrl.sprites.other.dream_world.front_default}
+            width={400}
+            alt={pokemon.name}
+          ></img>
         )}
-        <div>
+        <div className="my-2">
           {pokemonUrl !== ""
             ? pokemonUrl.types.map((type) => (
-                <span key={type.type.name} className="p-2">
+                <span
+                  key={type.type.name}
+                  className="p-2 px-3 text-white rounded-md mx-2 pokemon-type"
+                >
                   {type.type.name}
                 </span>
               ))
             : null}
         </div>
-        <div>
-          <span className="p-2">{pokemonUrl.height / 10} m</span>
-          <span className="p-2"> {pokemonUrl.weight / 10} kg</span>
+        <div className="flex flex-col items-center py-2">
+          <div>
+            <span className="mx-2">Height</span>
+            <span className="mx-2">Weight</span>
+          </div>
+          <div>
+            <span className="mx-2">{pokemonUrl.height / 10} m</span>
+            <span className="mx-2"> {pokemonUrl.weight / 10} kg</span>
+          </div>
         </div>
         <div className="flex">
           <div>
