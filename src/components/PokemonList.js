@@ -10,7 +10,7 @@ const PokemonList = ({ pokemons, previousPage, currentPage, nextPage }) => {
         nextPage={nextPage}
       />
 
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center items-center">
         {pokemons.map((pokemon) => (
           <Pokemon pokemon={pokemon} key={pokemon.name} />
         ))}

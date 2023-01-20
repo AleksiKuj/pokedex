@@ -3,6 +3,7 @@ import Button from "./Button"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { ClipLoader } from "react-spinners"
+import ProgressBar from "./ProgressBar"
 
 //DOESNT WORK ON PAGE REFRESH
 const PokemonView = ({ pokemons }) => {
@@ -19,12 +20,10 @@ const PokemonView = ({ pokemons }) => {
       const response = await axios.get(pokemon.url)
       setPokemonUrl(response.data)
       setLoading(false)
-      // console.log(pokemonUrl.abilities)
-      // console.log(pokemonUrl.abilities.map((ability) => ability.ability.name))
     }
     fetchPokemonImage(pokemon)
 
-    const x = () => {
+    const applyTypeColors = () => {
       setTimeout(() => {
         const elements = document.getElementsByClassName("pokemon-type")
         for (var i = 0; i < elements.length; i++) {
@@ -89,7 +88,39 @@ const PokemonView = ({ pokemons }) => {
         }
       }, 75)
     }
-    x()
+
+    const applyBarColors = () => {
+      setTimeout(() => {
+        const elements = document.getElementsByClassName("pokemon-stat-type")
+        const temp = document.getElementsByClassName("stat-fill")
+        for (var i = 0; i < elements.length; i++) {
+          switch (elements[i].innerHTML.toLowerCase()) {
+            case "hp":
+              temp[i].style.backgroundColor = "#FF0000"
+              break
+            case "attack":
+              temp[i].style.backgroundColor = "#F08030"
+              break
+            case "defense":
+              temp[i].style.backgroundColor = "#F8D030"
+              break
+            case "special-attack":
+              temp[i].style.backgroundColor = "#6890F0"
+              break
+            case "special-defense":
+              temp[i].style.backgroundColor = "#78C850"
+              break
+            case "speed":
+              temp[i].style.backgroundColor = "#F85888"
+              break
+            default:
+          }
+        }
+      }, 100)
+    }
+
+    applyTypeColors()
+    applyBarColors()
   }, [])
 
   if (!pokemon) {
@@ -110,7 +141,7 @@ const PokemonView = ({ pokemons }) => {
           <ClipLoader color="#D70040" />
         ) : (
           <img
-            src={pokemonUrl.sprites.other.dream_world.front_default}
+            src={pokemonUrl.sprites.other.home.front_default}
             width={400}
             alt={pokemon.name}
           ></img>
@@ -137,26 +168,27 @@ const PokemonView = ({ pokemons }) => {
             <span className="mx-2"> {pokemonUrl.weight / 10} kg</span>
           </div>
         </div>
-        <div className="flex">
-          <div>
-            <p className="font-semibold">Base stats</p>
-            {pokemonUrl !== ""
-              ? pokemonUrl.stats.map((stat) => (
-                  <p key={stat.stat.name}>
-                    <span>{stat.stat.name} </span>
-                    <span>{stat.base_stat}</span>
-                  </p>
-                ))
-              : null}
-          </div>
-          <div>
-            <p className="font-semibold">Abilities:</p>
-            {pokemonUrl !== ""
-              ? pokemonUrl.abilities.map((ability) => (
-                  <p key={ability.ability.name}>{ability.ability.name}</p>
-                ))
-              : null}
-          </div>
+
+        <div className="">
+          <p className="font-semibold text-center">Base stats</p>
+          {pokemonUrl !== ""
+            ? pokemonUrl.stats.map((stat) => (
+                <ProgressBar
+                  key={stat.stat.name}
+                  value={stat.base_stat}
+                  text={stat.stat.name}
+                />
+              ))
+            : null}
+        </div>
+
+        <div className="py-10">
+          <p className="font-semibold">Abilities:</p>
+          {pokemonUrl !== ""
+            ? pokemonUrl.abilities.map((ability) => (
+                <p key={ability.ability.name}>{ability.ability.name}</p>
+              ))
+            : null}
         </div>
       </div>
     </div>
