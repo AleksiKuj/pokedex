@@ -3,6 +3,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import PokemonList from "./components/PokemonList"
 import PokemonView from "./components/PokemonView"
+import Footer from "./components/Footer"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
             element={<PokemonView pokemons={pokemons} />}
           />
         </Routes>
+        <Footer />
       </Router>
     </div>
   )
