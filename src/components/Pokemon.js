@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 import ClipLoader from "react-spinners/ClipLoader"
-import ProgressBar from "./ProgressBar"
 
 const Pokemon = ({ pokemon }) => {
   const [imageUrl, setImageUrl] = useState("")

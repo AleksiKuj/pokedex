@@ -9,7 +9,7 @@ function App() {
   const [pokemons, setPokemons] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
-  const perPage = 20
+  const [perPage, setPerPage] = useState(20)
   const baseUrl = "https://pokeapi.co/api/v2"
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function App() {
     }
 
     getPokemon()
-  }, [currentPage])
+  }, [currentPage, perPage])
 
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -51,6 +51,8 @@ function App() {
                 currentPage={currentPage}
                 previousPage={previousPage}
                 nextPage={nextPage}
+                perPage={perPage}
+                setPerPage={setPerPage}
               />
             }
           />
