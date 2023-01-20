@@ -6,7 +6,7 @@ const DropdownMenu = ({ perPage, setPerPage, dropdownVisible }) => {
   if (dropdownVisible) {
     return (
       <div>
-        <span>Pokemon per page</span>
+        <span>Pokémon per page</span>
         <select
           value={perPage}
           onChange={handleChange}
