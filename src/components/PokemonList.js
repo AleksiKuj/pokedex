@@ -7,6 +7,7 @@ const PokemonList = ({
   pokemons,
   previousPage,
   currentPage,
+  setCurrentPage,
   nextPage,
   perPage,
   setPerPage,
@@ -28,6 +29,7 @@ const PokemonList = ({
     if (e.target.value.length > 1) {
       setFilter(e.target.value)
       console.log(filter)
+      setCurrentPage(1)
     } else {
       setFilter("")
       setPerPage(20)

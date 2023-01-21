@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-semibold">React Pokedéx</h1>
+    <div className="flex flex-col items-center pt-3">
+      <h1 className="text-4xl ">React Pokédex</h1>
     </div>
   )
 }

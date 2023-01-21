@@ -133,9 +133,8 @@ const PokemonView = ({ pokemons }) => {
         <Link to={"/"}>
           <Button buttonText="Back"></Button>
         </Link>
-        <p className="text-2xl font-semibold py-2">
-          {`${pokemon.name.charAt(0).toUpperCase()}${pokemon.name.slice(1)}`}{" "}
-          <span>#{pokemonUrl.id}</span>
+        <p className="text-3xl  pt-4 tracking-wider text-slate-900">
+          {pokemon.name.toUpperCase()}
         </p>
 
         <div className="flex flex-col md:flex-row items-center">
@@ -144,11 +143,13 @@ const PokemonView = ({ pokemons }) => {
               <p className="font-semibold text-center">Base stats</p>
               {pokemonUrl !== ""
                 ? pokemonUrl.stats.map((stat) => (
-                    <ProgressBar
-                      key={stat.stat.name}
-                      value={stat.base_stat}
-                      text={stat.stat.name}
-                    />
+                    <div className="pb-1">
+                      <ProgressBar
+                        key={stat.stat.name}
+                        value={stat.base_stat}
+                        text={stat.stat.name}
+                      />
+                    </div>
                   ))
                 : null}
             </div>
@@ -167,8 +168,12 @@ const PokemonView = ({ pokemons }) => {
           </div>
           <div className="flex justify-center order-3">
             <div className="my-2 text-center">
-              <table className="border-separate border-spacing-y-3 ">
+              <table className="border-separate border-spacing-y-3">
                 <tbody>
+                  <tr>
+                    <td className="font-semibold ">ID</td>
+                    <td># {pokemonUrl.id}</td>
+                  </tr>
                   <tr className="my-2">
                     <td className="font-semibold">Height</td>
                     <td>{pokemonUrl.height / 10} m</td>

@@ -39,6 +39,14 @@ function App() {
     resetPerPage()
   }, [currentPage, perPage, filter, value])
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    })
+  }
+
   const nextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1)
@@ -50,6 +58,12 @@ function App() {
       setCurrentPage(currentPage - 1)
       console.log(currentPage)
     }
+  }
+  const handleClick = (func) => {
+    func()
+    setTimeout(() => {
+      scrollToTop()
+    }, 75)
   }
   return (
     <div>
@@ -64,8 +78,9 @@ function App() {
                   <PokemonList
                     pokemons={pokemons}
                     currentPage={currentPage}
-                    previousPage={previousPage}
-                    nextPage={nextPage}
+                    setCurrentPage={setCurrentPage}
+                    previousPage={() => handleClick(previousPage)}
+                    nextPage={() => handleClick(nextPage)}
                     perPage={perPage}
                     setPerPage={setPerPage}
                     filter={filter}
