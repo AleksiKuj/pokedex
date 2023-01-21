@@ -5,22 +5,28 @@ import axios from "axios"
 import { ClipLoader } from "react-spinners"
 import ProgressBar from "./ProgressBar"
 
-//DOESNT WORK ON PAGE REFRESH
 const PokemonView = ({ pokemons }) => {
   const [pokemonUrl, setPokemonUrl] = useState("")
   const [loading, setLoading] = useState(true)
+  const [pokemon, setPokemon] = useState(null)
 
   const match = useMatch("/pokemons/:name")
-  const pokemon = match
-    ? pokemons.find((pokemon) => pokemon.name === match.params.name)
-    : null
 
   useEffect(() => {
     const fetchPokemonImage = async (pokemon) => {
-      const response = await axios.get(pokemon.url)
-      setPokemonUrl(response.data)
-      setLoading(false)
+      if (pokemon) {
+        const response = await axios.get(pokemon.url)
+        setPokemonUrl(response.data)
+        setLoading(false)
+      }
     }
+    if (match) {
+      const foundPokemon = pokemons.find(
+        (pokemon) => pokemon.name === match.params.name
+      )
+      setPokemon(foundPokemon)
+    }
+
     fetchPokemonImage(pokemon)
 
     const applyTypeColors = () => {
@@ -121,7 +127,7 @@ const PokemonView = ({ pokemons }) => {
 
     applyTypeColors()
     applyBarColors()
-  }, [])
+  }, [match, pokemon, pokemons])
 
   if (!pokemon) {
     return null
@@ -133,6 +139,7 @@ const PokemonView = ({ pokemons }) => {
         <Link to={"/"}>
           <Button buttonText="Back"></Button>
         </Link>
+
         <p className="text-3xl  pt-4 tracking-wider text-slate-900">
           {pokemon.name.toUpperCase()}
         </p>
@@ -143,7 +150,7 @@ const PokemonView = ({ pokemons }) => {
               <p className="font-semibold text-center">Base stats</p>
               {pokemonUrl !== ""
                 ? pokemonUrl.stats.map((stat) => (
-                    <div className="pb-1">
+                    <div key={`${stat.stat.name}bar`} className="pb-1">
                       <ProgressBar
                         key={stat.stat.name}
                         value={stat.base_stat}
