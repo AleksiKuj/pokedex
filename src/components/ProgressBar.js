@@ -4,7 +4,6 @@ const ProgressBar = ({ value, text }) => {
     borderRadius: "inherit",
   }
 
-  //   ${pokemon.name.charAt(0).toUpperCase()}${pokemon.name.slice(1)}`}
   return (
     <div className="mb-6 my-3 mx-10 w-60 h-5">
       <p className="font-semibold pokemon-stat-type">

@@ -137,58 +137,81 @@ const PokemonView = ({ pokemons }) => {
           {`${pokemon.name.charAt(0).toUpperCase()}${pokemon.name.slice(1)}`}{" "}
           <span>#{pokemonUrl.id}</span>
         </p>
-        {loading ? (
-          <ClipLoader color="#D70040" />
-        ) : (
-          <img
-            src={pokemonUrl.sprites.other.home.front_default}
-            width={400}
-            alt={pokemon.name}
-          ></img>
-        )}
-        <div className="my-2">
-          {pokemonUrl !== ""
-            ? pokemonUrl.types.map((type) => (
-                <span
-                  key={type.type.name}
-                  className="p-2 px-3 text-white rounded-md mx-2 pokemon-type"
-                >
-                  {type.type.name}
-                </span>
-              ))
-            : null}
-        </div>
-        <div className="flex flex-col items-center py-2">
-          <div>
-            <span className="mx-2">Height</span>
-            <span className="mx-2">Weight</span>
-          </div>
-          <div>
-            <span className="mx-2">{pokemonUrl.height / 10} m</span>
-            <span className="mx-2"> {pokemonUrl.weight / 10} kg</span>
-          </div>
-        </div>
 
-        <div className="">
-          <p className="font-semibold text-center">Base stats</p>
-          {pokemonUrl !== ""
-            ? pokemonUrl.stats.map((stat) => (
-                <ProgressBar
-                  key={stat.stat.name}
-                  value={stat.base_stat}
-                  text={stat.stat.name}
-                />
-              ))
-            : null}
-        </div>
+        <div className="flex flex-col md:flex-row items-center">
+          <div className="order-2 md:order-1">
+            <div className="">
+              <p className="font-semibold text-center">Base stats</p>
+              {pokemonUrl !== ""
+                ? pokemonUrl.stats.map((stat) => (
+                    <ProgressBar
+                      key={stat.stat.name}
+                      value={stat.base_stat}
+                      text={stat.stat.name}
+                    />
+                  ))
+                : null}
+            </div>
+          </div>
 
-        <div className="py-10">
-          <p className="font-semibold">Abilities:</p>
-          {pokemonUrl !== ""
-            ? pokemonUrl.abilities.map((ability) => (
-                <p key={ability.ability.name}>{ability.ability.name}</p>
-              ))
-            : null}
+          <div className="order-1 md:order-2">
+            {loading ? (
+              <ClipLoader color="#D70040" />
+            ) : (
+              <img
+                src={pokemonUrl.sprites.other.home.front_default}
+                width={400}
+                alt={pokemon.name}
+              ></img>
+            )}
+          </div>
+          <div className="flex justify-center order-3">
+            <div className="my-2 text-center">
+              <table className="border-separate border-spacing-y-3 ">
+                <tbody>
+                  <tr className="my-2">
+                    <td className="font-semibold">Height</td>
+                    <td>{pokemonUrl.height / 10} m</td>
+                  </tr>
+                  <tr className="py-5">
+                    <td className="font-semibold">Weight</td>
+                    <td>{pokemonUrl.weight / 10} kg</td>
+                  </tr>
+                  <tr>
+                    <td className="font-semibold">Type</td>
+                    <td>
+                      {pokemonUrl !== ""
+                        ? pokemonUrl.types.map((type) => (
+                            <span
+                              key={type.type.name}
+                              className="p-2 px-3 text-white rounded-md mr-3 pokemon-type"
+                            >
+                              {type.type.name}
+                            </span>
+                          ))
+                        : null}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="font-semibold">Abilities </td>
+                    <td>
+                      {pokemonUrl !== ""
+                        ? pokemonUrl.abilities.map((ability) => (
+                            <p key={ability.ability.name} className="ml-2">
+                              {`${ability.ability.name
+                                .charAt(0)
+                                .toUpperCase()}${ability.ability.name.slice(
+                                1
+                              )}`}
+                            </p>
+                          ))
+                        : null}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

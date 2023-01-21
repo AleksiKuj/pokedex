@@ -56,7 +56,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen items-center">
           <Header />
-          <div className="flex-grow  w-4/5 items-center justify-center">
+          <div className="flex-grow  w-full items-center justify-center">
             <Routes>
               <Route
                 path="/"
